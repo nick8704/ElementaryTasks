@@ -3,7 +3,7 @@ package com.anikonets.task8;
 public class FibonacciSequence {
 
     public static void main(String[] args) {
-        printFibonacciSequence(8);
+        printFibonacciSequence(7);
         System.out.println();
         printFibonacciSequence(10_000L, 500_000_000L);
     }

@@ -3,7 +3,7 @@ package com.anikonets.task6;
 public class LuckyTicket {
 
     public static void main(String[] args) {
-        matchingCountingMethods(1, 999999);
+        matchingCountingMethods(111111, 999999);
     }
 
     private static void matchingCountingMethods(int min, int max) {
