@@ -45,7 +45,10 @@ public class Main {
             TriangleParametrs = reader.readLine();
             String[] parametrs = TriangleParametrs.split(",");
             while (parametrs.length != 4
-                    || (!isPositiveDigit(parametrs[1]) || !isPositiveDigit(parametrs[2]) || !isPositiveDigit(parametrs[3]))) {
+                    || (!isPositiveDigit(parametrs[1])
+                    || !isPositiveDigit(parametrs[2])
+                    || !isPositiveDigit(parametrs[3])
+                    || parametrs[0].isEmpty())) {
                 System.out.print("Please check your input and try again.");
                 TriangleParametrs = reader.readLine();
                 parametrs = TriangleParametrs.split(",");
@@ -81,7 +84,7 @@ public class Main {
         System.out.println("================ Triangles list: ================");
         int i = 1;
         Collections.sort(trianglesList);
-        for (Triangle triangle: trianglesList) {
+        for (Triangle triangle : trianglesList) {
             System.out.print(i + ". ");
             System.out.println(triangle.toString());
             i++;
