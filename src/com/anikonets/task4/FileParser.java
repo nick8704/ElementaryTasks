@@ -5,50 +5,41 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileParser {
 
-    private static final String PATH = "task4.txt";
-    private static final String LINE_TO_COUNT = "THIS IS LINE TO COUNT";
-    private static final String LINE_TO_REPLACEMENT = "THIS IS LINE TO REPLACEMENT";
-    private static final String NEW_LINE = "NEW LINE";
-
-    public static void main(String[] args) {
-        int lineCount = lineCounting(PATH, LINE_TO_COUNT);
-        System.out.printf("In file %s line \"%s\" is found %d times.", PATH, LINE_TO_COUNT, lineCount);
-        lineReplacement(PATH, LINE_TO_REPLACEMENT, NEW_LINE);
-    }
-
-    private static int lineCounting(String path, String line) {
+    public static int lineCounting(String path, String line) {
+        Pattern pattern = Pattern.compile(line);
         int count = 0;
         for (String s : makeListFromFile(path)) {
-            if (s.equals(line)) {
+            Matcher matcher = pattern.matcher(s);
+            while (matcher.find()) {
                 count++;
             }
         }
         return count;
     }
 
-    private static void lineReplacement(String path, String oldLine, String newLine) {
+    public static boolean lineReplacement(String path, String oldLine, String newLine) {
         List<String> tmpList = makeListFromFile(path);
         try (FileWriter writer = new FileWriter(path)) {
             for (String s : tmpList) {
-                if (s.equals(oldLine)) {
-                    writer.write(newLine + "\n");
-                } else {
-                    writer.write(s + "\n");
-                }
+                writer.write(s.replaceAll(oldLine, newLine) + "\n");
                 writer.flush();
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     private static List<String> makeListFromFile(String path) {
         List<String> result = null;
         try {
-            result = Files.readAllLines(Paths.get(PATH));
+            result = Files.readAllLines(Paths.get(path));
         } catch (IOException e) {
             e.printStackTrace();
         }

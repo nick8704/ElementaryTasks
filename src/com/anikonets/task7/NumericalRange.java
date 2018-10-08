@@ -1,20 +1,26 @@
 package com.anikonets.task7;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NumericalRange {
 
-    public static void main(String[] args) {
-        printNumericalRange(10, 19.9);
-    }
-
-    private static void printNumericalRange(int length, double value) {
+    public static List<Integer> getNumericalRange(int length, double value) {
         int start = (int) Math.ceil(Math.sqrt(value));
-        StringBuilder sb = new StringBuilder();
+        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < length; i++) {
-            sb.append(start).append(',');
+            result.add(start);
             start++;
         }
-        String result = sb.toString();
-        System.out.println(result.substring(0, result.length() - 1));
+        return result;
     }
 
+    public static void printNumericalRange(List<Integer> list) {
+        StringBuilder result = new StringBuilder();
+        for (Integer i: list) {
+            result.append(i).append(',');
+        }
+        String resultLine = result.toString();
+        System.out.println(resultLine.substring(0, resultLine.length() - 1));
+    }
 }

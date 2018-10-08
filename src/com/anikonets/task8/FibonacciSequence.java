@@ -1,36 +1,38 @@
 package com.anikonets.task8;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FibonacciSequence {
 
-    public static void main(String[] args) {
-        printFibonacciSequence(7);
-        System.out.println();
-        printFibonacciSequence(10_000L, 500_000_000L);
-    }
-
-    private static void printFibonacciSequence(int length) {
+    public static List<Long> getFibonacciSequence(int length) {
+        List<Long> result = new ArrayList<>();
         if (length <= 0) {
-            return;
+            return result;
         }
+
         long firstElement = 1L;
         long secondElement = 1L;
         long nextElement = firstElement + secondElement;
         if (length == 1) {
-            System.out.print(firstElement + " " + secondElement + " ");
+            result.add(firstElement);
+            result.add(secondElement);
         }
         while (Long.toString(nextElement).length() <= length) {
             nextElement = firstElement + secondElement;
             firstElement = secondElement;
             secondElement = nextElement;
             if (Long.toString(nextElement).length() == length) {
-                System.out.print(nextElement + " ");
+                result.add(nextElement);
             }
         }
+        return result;
     }
 
-    private static void printFibonacciSequence(long lowerLimit, long upperLimit) {
+    public static List<Long> getFibonacciSequence(long lowerLimit, long upperLimit) {
+        List<Long> result = new ArrayList<>();
         if(upperLimit <= 0) {
-            return;
+            return result;
         }
         if (lowerLimit <= 0) {
             lowerLimit = 1L;
@@ -38,7 +40,8 @@ public class FibonacciSequence {
         long firstElement = 1L;
         long secondElement = 1L;
         if (lowerLimit == 1) {
-            System.out.print(firstElement + " " + secondElement + " ");
+            result.add(firstElement);
+            result.add(secondElement);
         }
         long nextElement = firstElement + secondElement;
         while (nextElement <= upperLimit) {
@@ -46,8 +49,15 @@ public class FibonacciSequence {
             firstElement = secondElement;
             secondElement = nextElement;
             if (nextElement >= lowerLimit && nextElement <= upperLimit) {
-                System.out.print(nextElement + " ");
+                result.add(nextElement);
             }
+        }
+        return result;
+    }
+
+    public static void printFibonacciSequence(List<Long> list) {
+        for (Long number: list) {
+            System.out.print(number + " ");
         }
     }
 

@@ -11,9 +11,6 @@ public class Triangle implements Comparable<Triangle> {
     private double thirdSide;
     private double square;
 
-    public Triangle() {
-    }
-
     public Triangle(String name, double firstSide, double secondSide, double thirdSide) {
         this.name = name;
         this.firstSide = firstSide;

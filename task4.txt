@@ -8,19 +8,17 @@ I have seen roses damask'd, red and white,
 THIS IS LINE TO COUNT
 THIS IS LINE TO REPLACEMENT
 But no such roses see I in her cheeks;
-And in some perfumes is there more delight
-Than in the breath that from my mistress reeks.
+And in some THIS IS LINE TO REPLACEMENTperfumes is there more delight
+Than in the THIS IS LINE TO COUNTbreath that from my mistress reeks.
 I love to hear her speak, yet well I know
 THIS IS LINE TO COUNT
 That music hath a far more pleasing sound;
 THIS IS LINE TO COUNT
 I grant I never saw a goddess go;
 THIS IS LINE TO REPLACEMENT
-My mistress, when she walks, treads on the ground:
+My mistress, when she walks, THIS IS LINE TO COUNTtreads on the ground:THIS IS LINE TO COUNT
 And yet, by heaven, I think my love as rare
-As any she belied with false compare.
-
-THIS IS LINE TO COUNT
+As any she belied with THIS IS LINE TO REPLACEMENTfalse compare.
 
 THIS IS LINE TO REPLACEMENT
 THIS IS LINE TO COUNT THIS IS LINE TO COUNT
