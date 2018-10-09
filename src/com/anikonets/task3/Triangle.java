@@ -16,17 +16,17 @@ public class Triangle implements Comparable<Triangle> {
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.thirdSide = thirdSide;
-        square = geroneSquare(firstSide, secondSide, thirdSide);
+        square = getGeroneSquare(firstSide, secondSide, thirdSide);
     }
 
-    private double geroneSquare(double firstSide, double secondSide, double thirdSide) {
+    private double getGeroneSquare(double firstSide, double secondSide, double thirdSide) {
         double p = (firstSide + secondSide + thirdSide) / 2;
         return Math.sqrt(p * (p - firstSide) * (p - secondSide) * (p - thirdSide));
     }
 
     @Override
     public int compareTo(Triangle o) {
-        int result = Double.compare(square, o.square);
+        int result = Double.compare(o.square, square);
         if (result == 0) {
             result = this.name.compareTo(o.name);
         }
@@ -40,6 +40,26 @@ public class Triangle implements Comparable<Triangle> {
         return "[Triangle "
                 + name + "]: "
                 + square + " cm";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getFirstSide() {
+        return firstSide;
+    }
+
+    public double getSecondSide() {
+        return secondSide;
+    }
+
+    public double getThirdSide() {
+        return thirdSide;
+    }
+
+    public double getSquare() {
+        return square;
     }
 
 }

@@ -5,10 +5,10 @@ public class IntegerConverter {
     private final static int MAX_RANK = 4;
 
     private final static String[][] rankName = new String[][]{
-            {"0", "", "", ""},  // 1
-            {"1", "тысяча ", "тысячи ", "тысяч "},  // 2
-            {"0", "миллион ", "миллиона ", "миллионов "},  // 3
-            {"0", "миллиард ", "миллиарда ", "миллиардов "},  // 4
+            {"0", "", "", ""},
+            {"1", "тысяча ", "тысячи ", "тысяч "},
+            {"0", "миллион ", "миллиона ", "миллионов "},
+            {"0", "миллиард ", "миллиарда ", "миллиардов "},
     };
 
     private final static String[][] digitName = new String[][]{
@@ -58,7 +58,6 @@ public class IntegerConverter {
                 if (i > 0) {
                     continue;
                 }
-                result.append(rankName[i][one]);
             } else {
                 if (quotient >= 100) {
                     result.append(digitName[quotient / 100][hun]);

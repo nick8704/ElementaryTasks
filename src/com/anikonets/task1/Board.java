@@ -48,4 +48,12 @@ public class Board {
         return line.toString();
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
 }

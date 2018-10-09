@@ -31,13 +31,13 @@ public class CoverMaker {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Enter height of the cover: ");
             firstParametr = reader.readLine();
-            while (!isPositiveDigit(firstParametr)) {
+            while (isNotPositiveDigit(firstParametr)) {
                 System.out.print("Please, enter a positive number: ");
                 firstParametr = reader.readLine();
             }
             System.out.print("Now enter width of the cover: ");
             secondParametr = reader.readLine();
-            while (!isPositiveDigit(secondParametr)) {
+            while (isNotPositiveDigit(secondParametr)) {
                 System.out.print("Please, enter a positive number: ");
                 secondParametr = reader.readLine();
             }
@@ -48,9 +48,9 @@ public class CoverMaker {
         return null;
     }
 
-    private static boolean isPositiveDigit(String line) {
+    private static boolean isNotPositiveDigit(String line) {
         if (line == null || line.isEmpty()) {
-            return false;
+            return true;
         }
         int dotCount = 0;
         for (int i = 0; i < line.length(); i++) {
@@ -58,10 +58,10 @@ public class CoverMaker {
                 dotCount++;
             }
             if ((!Character.isDigit(line.charAt(i)) && line.charAt(i) != '.') || line.charAt(i) == '-' || dotCount > 1) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 }

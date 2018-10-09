@@ -13,18 +13,20 @@ public class TriangleMaker {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             TriangleParametrs = reader.readLine();
             String[] parametrs = TriangleParametrs.split(",");
+
             while (parametrs.length != 4
                     || ((parametrs[0].isEmpty()
-                    || !isPositiveDigit(parametrs[1])
-                    || !isPositiveDigit(parametrs[2])
-                    || !isPositiveDigit(parametrs[3])))
-                    || !isTriangle(Double.parseDouble(parametrs[1].trim()),
+                    || isNotPositiveDigit(parametrs[1])
+                    || isNotPositiveDigit(parametrs[2])
+                    || isNotPositiveDigit(parametrs[3])))
+                    || isNotTriangle(Double.parseDouble(parametrs[1].trim()),
                     Double.parseDouble(parametrs[2].trim()),
                     Double.parseDouble(parametrs[3].trim()))) {
                 System.out.print("Please check your input and try again.");
                 TriangleParametrs = reader.readLine();
                 parametrs = TriangleParametrs.split(",");
             }
+
             return new Triangle(parametrs[0].toLowerCase().trim(),
                     Double.parseDouble(parametrs[1].trim()),
                     Double.parseDouble(parametrs[2].trim()),
@@ -32,13 +34,14 @@ public class TriangleMaker {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
-    private static boolean isPositiveDigit(String line) {
+    private static boolean isNotPositiveDigit(String line) {
         line = line.trim();
         if (line.isEmpty()) {
-            return false;
+            return true;
         }
         int dotCount = 0;
         for (int i = 0; i < line.length(); i++) {
@@ -46,15 +49,18 @@ public class TriangleMaker {
                 dotCount++;
             }
             if ((!Character.isDigit(line.charAt(i)) && line.charAt(i) != '.') || line.charAt(i) == '-' || dotCount > 1) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
-    private static boolean isTriangle(double firstSide, double secondSide, double thirdSide) {
-        double p = (firstSide + secondSide + thirdSide) / 2;
-        return (!(p - firstSide <= 0)) && (!(p - secondSide <= 0)) && (!(p - thirdSide <= 0));
+    private static boolean isNotTriangle(double a, double b, double c) {
+        if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
+            System.out.println("ERROR. There is no triangle with such sides.");
+            return true;
+        }
+        return false;
     }
 
 }
