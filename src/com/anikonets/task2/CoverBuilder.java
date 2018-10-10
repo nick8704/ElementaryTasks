@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class CoverMaker {
+public class CoverBuilder {
 
     public static void checkCondition() {
         System.out.println("Please, enter parametrs of the first cover.");

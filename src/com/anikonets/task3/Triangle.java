@@ -16,7 +16,7 @@ public class Triangle implements Comparable<Triangle> {
         this.firstSide = firstSide;
         this.secondSide = secondSide;
         this.thirdSide = thirdSide;
-        square = getGeroneSquare(firstSide, secondSide, thirdSide);
+        this.square = getGeroneSquare(firstSide, secondSide, thirdSide);
     }
 
     private double getGeroneSquare(double firstSide, double secondSide, double thirdSide) {

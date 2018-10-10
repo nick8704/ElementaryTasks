@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class TriangleMaker {
+public abstract class TriangleBuilder {
 
     public static Triangle makeTriangle() {
         String TriangleParametrs;
@@ -22,6 +22,7 @@ public class TriangleMaker {
                     || isNotTriangle(Double.parseDouble(parametrs[1].trim()),
                     Double.parseDouble(parametrs[2].trim()),
                     Double.parseDouble(parametrs[3].trim()))) {
+
                 System.out.print("Please check your input and try again.");
                 TriangleParametrs = reader.readLine();
                 parametrs = TriangleParametrs.split(",");
