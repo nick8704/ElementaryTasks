@@ -5,6 +5,9 @@ import java.util.List;
 
 public class FibonacciSequence {
 
+    private FibonacciSequence() {
+    }
+
     public static List<Long> getFibonacciSequence(int length) {
         List<Long> result = new ArrayList<>();
         if (length <= 0) {

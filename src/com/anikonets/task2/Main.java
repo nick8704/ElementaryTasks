@@ -15,14 +15,14 @@ public class Main {
 
     private static void primaryMethod() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            CoverBuilder.checkCondition();
+            EnvelopeBuilder.checkCondition();
             String str;
             while (true) {
                 System.out.println();
                 System.out.println("Do you want to continue?");
                 str = reader.readLine();
                 if (str.equalsIgnoreCase(FIRST_ANSWER) || str.equalsIgnoreCase(SECOND_ANSWER)) {
-                    CoverBuilder.checkCondition();
+                    EnvelopeBuilder.checkCondition();
                 } else {
                     break;
                 }

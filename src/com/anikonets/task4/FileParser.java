@@ -23,17 +23,18 @@ public class FileParser {
     }
 
     public static boolean lineReplacement(String path, String oldLine, String newLine) {
+        boolean result = false;
         List<String> tmpList = makeListFromFile(path);
         try (FileWriter writer = new FileWriter(path)) {
             for (String s : tmpList) {
                 writer.write(s.replaceAll(oldLine, newLine) + "\n");
                 writer.flush();
             }
-            return true;
+            result = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return result;
     }
 
     private static List<String> makeListFromFile(String path) {

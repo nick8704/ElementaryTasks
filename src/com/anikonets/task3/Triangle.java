@@ -2,6 +2,7 @@ package com.anikonets.task3;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class Triangle implements Comparable<Triangle> {
 
@@ -10,6 +11,9 @@ public class Triangle implements Comparable<Triangle> {
     private double secondSide;
     private double thirdSide;
     private double square;
+
+    public Triangle() {
+    }
 
     public Triangle(String name, double firstSide, double secondSide, double thirdSide) {
         this.name = name;
@@ -40,6 +44,22 @@ public class Triangle implements Comparable<Triangle> {
         return "[Triangle "
                 + name + "]: "
                 + square + " cm";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return Double.compare(triangle.firstSide, firstSide) == 0 &&
+                Double.compare(triangle.secondSide, secondSide) == 0 &&
+                Double.compare(triangle.thirdSide, thirdSide) == 0 &&
+                Objects.equals(name, triangle.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, firstSide, secondSide, thirdSide);
     }
 
     public String getName() {

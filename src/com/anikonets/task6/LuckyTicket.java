@@ -2,6 +2,9 @@ package com.anikonets.task6;
 
 public class LuckyTicket {
 
+    private LuckyTicket() {
+    }
+
     public static int simpleCounting(int min, int max) {
         int count = 0;
         int[] tmpArray;

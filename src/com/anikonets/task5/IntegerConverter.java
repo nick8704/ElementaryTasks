@@ -4,27 +4,29 @@ public class IntegerConverter {
 
     private final static int MAX_RANK = 4;
 
-    private final static String[][] rankName = new String[][]{
-            {"0", "", "", ""},
-            {"1", "тысяча ", "тысячи ", "тысяч "},
-            {"0", "миллион ", "миллиона ", "миллионов "},
-            {"0", "миллиард ", "миллиарда ", "миллиардов "},
-    };
+    private static String[][] rankName;
+    private static String[][] digitName;
+    private static String zero;
+    private static String minus;
 
-    private final static String[][] digitName = new String[][]{
-            {"", "", "десять ", "", ""},
-            {"один ", "одна ", "одиннадцать ", "десять ", "сто "},
-            {"два ", "две ", "двенадцать ", "двадцать ", "двести "},
-            {"три ", "три ", "тринадцать ", "тридцать ", "триста "},
-            {"четыре ", "четыре ", "четырнадцать ", "сорок ", "четыреста "},
-            {"пять ", "пять ", "пятнадцать ", "пятьдесят ", "пятьсот "},
-            {"шесть ", "шесть ", "шестнадцать ", "шестьдесят ", "шестьсот "},
-            {"семь ", "семь ", "семнадцать ", "семьдесят ", "семьсот "},
-            {"восемь ", "восемь ", "восемнадцать ", "восемьдесят ", "восемьсот "},
-            {"девять ", "девять ", "девятнадцать ", "девяносто ", "девятьсот "}
-    };
+    public static String numberToString(int number, Language language) {
+        if (language == Language.RUS) {
+            rankName = RusConfig.RANK_NAME;
+            digitName = RusConfig.DIGIT_NAME;
+            zero = RusConfig.ZERO;
+            minus = RusConfig.MINUS;
+        } else if (language == Language.UA) {
+            rankName = UaConfig.RANK_NAME;
+            digitName = UaConfig.DIGIT_NAME;
+            zero = UaConfig.ZERO;
+            minus = UaConfig.MINUS;
+        } else if (language == Language.UK) {
+            rankName = UkConfig.RANK_NAME;
+            digitName = UkConfig.DIGIT_NAME;
+            zero = UkConfig.ZERO;
+            minus = UkConfig.MINUS;
+        }
 
-    public static String numberToString(int number) {
         StringBuilder result = new StringBuilder();
         int quotient;
         long divisor = 1;
@@ -38,11 +40,11 @@ public class IntegerConverter {
         int dec2 = 2;
 
         if (number == 0) {
-            return "ноль";
+            return zero;
         }
 
         if (number < 0) {
-            result.append("минус ");
+            result.append(minus);
             number = -number;
         }
 
@@ -62,13 +64,24 @@ public class IntegerConverter {
                 if (quotient >= 100) {
                     result.append(digitName[quotient / 100][hun]);
                     quotient %= 100;
+                    if (language == Language.UK && quotient <= 20 && quotient > 0) {
+                        result.append(UkConfig.AND);
+                    }
                 }
                 if (quotient >= 20) {
-                    result.append(digitName[quotient / 10][dec]);
+                    if (language == Language.UK) {
+                        result.append(UkConfig.AND).append(digitName[quotient / 10][dec]).append('-');
+                    } else {
+                        result.append(digitName[quotient / 10][dec]);
+                    }
                     quotient %= 10;
                 }
                 if (quotient >= 10) {
-                    result.append(digitName[quotient - 10][dec2]);
+                    if (language == Language.UK) {
+                        result.append(UkConfig.AND).append(digitName[quotient - 10][dec2]);
+                    } else {
+                        result.append(digitName[quotient - 10][dec2]);
+                    }
                 } else {
                     if (quotient >= 1) {
                         result.append(digitName[quotient]["0".equals(rankName[i][0]) ? 0 : 1]);
@@ -89,7 +102,30 @@ public class IntegerConverter {
                 }
             }
         }
-        return result.toString();
+
+        String resultString = result.toString();
+        if (resultString.endsWith(" ")) {
+            resultString = resultString.substring(0, resultString.length() - 1);
+        }
+        if (resultString.endsWith("-")) {
+            resultString = resultString.substring(0, resultString.length() - 1);
+        }
+        if (resultString.startsWith("-")) {
+            resultString = resultString.substring(1, resultString.length());
+        }
+        if (resultString.startsWith("and ")) {
+            resultString = resultString.substring(4, resultString.length());
+        }
+
+
+        return resultString
+                .replaceAll(" -", "-")
+                .replaceAll("minus and ", "minus ")
+                .replaceAll("and and", "and");
+    }
+
+    public static String numberToString(int number) {
+        return numberToString(number, Language.RUS);
     }
 
 }

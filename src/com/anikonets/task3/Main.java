@@ -20,14 +20,14 @@ public class Main {
 
     private static void primaryMethod() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            trianglesList.add(TriangleBuilder.makeTriangle());
+            trianglesList.add(TriangleBuilder.makeTriangle(Controller.readFromConsole()));
             String str;
             while (true) {
                 System.out.println();
                 System.out.println("Do you want to add another one triangle?");
                 str = reader.readLine();
                 if (str.equalsIgnoreCase(FIRST_ANSWER) || str.equalsIgnoreCase(SECOND_ANSWER)) {
-                    trianglesList.add(TriangleBuilder.makeTriangle());
+                    trianglesList.add(TriangleBuilder.makeTriangle(Controller.readFromConsole()));
                 } else {
                     break;
                 }

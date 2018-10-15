@@ -5,8 +5,16 @@ import java.util.List;
 
 public class NumericalRange {
 
+    private NumericalRange() {
+    }
+
     public static List<Integer> getNumericalRange(int length, double value) {
-        int start = (int) Math.ceil(Math.sqrt(value));
+        int start;
+        if (value <= 0) {
+            start = 1;
+        } else {
+            start = (int) Math.ceil(Math.sqrt(value));
+        }
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             result.add(start);
@@ -17,7 +25,7 @@ public class NumericalRange {
 
     public static void printNumericalRange(List<Integer> list) {
         StringBuilder result = new StringBuilder();
-        for (Integer i: list) {
+        for (Integer i : list) {
             result.append(i).append(',');
         }
         String resultLine = result.toString();
