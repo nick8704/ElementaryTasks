@@ -1,6 +1,6 @@
 package com.anikonets.task5;
 
-public class UkConfig {
+public class EngConfig {
 
     public final static String ZERO = "zero";
     public final static String MINUS = "minus ";

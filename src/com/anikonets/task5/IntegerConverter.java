@@ -2,6 +2,9 @@ package com.anikonets.task5;
 
 public class IntegerConverter {
 
+    private IntegerConverter() {
+    }
+
     private final static int MAX_RANK = 4;
 
     private static String[][] rankName;
@@ -20,11 +23,11 @@ public class IntegerConverter {
             digitName = UaConfig.DIGIT_NAME;
             zero = UaConfig.ZERO;
             minus = UaConfig.MINUS;
-        } else if (language == Language.UK) {
-            rankName = UkConfig.RANK_NAME;
-            digitName = UkConfig.DIGIT_NAME;
-            zero = UkConfig.ZERO;
-            minus = UkConfig.MINUS;
+        } else if (language == Language.ENG) {
+            rankName = EngConfig.RANK_NAME;
+            digitName = EngConfig.DIGIT_NAME;
+            zero = EngConfig.ZERO;
+            minus = EngConfig.MINUS;
         }
 
         StringBuilder result = new StringBuilder();
@@ -64,21 +67,21 @@ public class IntegerConverter {
                 if (quotient >= 100) {
                     result.append(digitName[quotient / 100][hun]);
                     quotient %= 100;
-                    if (language == Language.UK && quotient <= 20 && quotient > 0) {
-                        result.append(UkConfig.AND);
+                    if (language == Language.ENG && quotient <= 20 && quotient > 0) {
+                        result.append(EngConfig.AND);
                     }
                 }
                 if (quotient >= 20) {
-                    if (language == Language.UK) {
-                        result.append(UkConfig.AND).append(digitName[quotient / 10][dec]).append('-');
+                    if (language == Language.ENG && quotient % 10 != 0) {
+                        result.append(EngConfig.AND).append(digitName[quotient / 10][dec]).append('-');
                     } else {
                         result.append(digitName[quotient / 10][dec]);
                     }
                     quotient %= 10;
                 }
                 if (quotient >= 10) {
-                    if (language == Language.UK) {
-                        result.append(UkConfig.AND).append(digitName[quotient - 10][dec2]);
+                    if (language == Language.ENG) {
+                        result.append(EngConfig.AND).append(digitName[quotient - 10][dec2]);
                     } else {
                         result.append(digitName[quotient - 10][dec2]);
                     }
@@ -105,9 +108,6 @@ public class IntegerConverter {
 
         String resultString = result.toString();
         if (resultString.endsWith(" ")) {
-            resultString = resultString.substring(0, resultString.length() - 1);
-        }
-        if (resultString.endsWith("-")) {
             resultString = resultString.substring(0, resultString.length() - 1);
         }
         if (resultString.startsWith("-")) {
