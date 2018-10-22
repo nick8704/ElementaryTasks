@@ -48,25 +48,4 @@ class IntegerConverterTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void shouldNumberToString7() {
-        String expected = "zero";
-        String actual = IntegerConverter.numberToString(0, Language.ENG);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void shouldNumberToString8() {
-        String expected = "minus fifty-two million seven hundred thousand eight hundred and forty-three";
-        String actual = IntegerConverter.numberToString(-52700843, Language.ENG);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void shouldNumberToString9() {
-        String expected = "ninety-three thousand five hundred and seventeen";
-        String actual = IntegerConverter.numberToString(93517, Language.ENG);
-        assertEquals(expected, actual);
-    }
-
 }

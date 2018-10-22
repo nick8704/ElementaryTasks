@@ -7,11 +7,9 @@ public class EnvelopeBuilder {
         Envelope firstEnvelope = makeEnvelope(Controller.readFromConsole());
         System.out.println("Now enter parametrs of the second envelope.");
         Envelope secondEnvelope = makeEnvelope(Controller.readFromConsole());
-        assert firstEnvelope != null;
         if (firstEnvelope.isSmaller(secondEnvelope)) {
             System.out.println("You can put THE FIRST envelope IN THE SECOND.");
         } else {
-            assert secondEnvelope != null;
             if (secondEnvelope.isSmaller(firstEnvelope)) {
                 System.out.println("You can put THE SECOND envelope IN THE FIRST.");
             } else {

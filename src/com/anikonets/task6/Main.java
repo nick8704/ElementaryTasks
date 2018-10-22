@@ -7,8 +7,9 @@ public class Main {
     }
 
     private static void matchingCountingMethods(int min, int max) {
-        int simpleCountingResult = LuckyTicket.simpleCounting(min, max);
-        int complicatedCountingResult = LuckyTicket.complicatedCounting(min, max);
+        TicketsPack ticketsPack = new TicketsPack(min, max);
+        int simpleCountingResult = ticketsPack.getQuantityBySimpleCounting();
+        int complicatedCountingResult = ticketsPack.getQuantityByComplicatedCounting();
         if (simpleCountingResult > complicatedCountingResult) {
             System.out.println("Simple counting method won.");
         } else if (simpleCountingResult < complicatedCountingResult) {

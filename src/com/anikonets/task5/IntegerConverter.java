@@ -13,26 +13,11 @@ public class IntegerConverter {
     private static String minus;
 
     public static String numberToString(int number, Language language) {
-        if (language == Language.RUS) {
-            rankName = RusConfig.RANK_NAME;
-            digitName = RusConfig.DIGIT_NAME;
-            zero = RusConfig.ZERO;
-            minus = RusConfig.MINUS;
-        } else if (language == Language.UA) {
-            rankName = UaConfig.RANK_NAME;
-            digitName = UaConfig.DIGIT_NAME;
-            zero = UaConfig.ZERO;
-            minus = UaConfig.MINUS;
-        } else if (language == Language.ENG) {
-            rankName = EngConfig.RANK_NAME;
-            digitName = EngConfig.DIGIT_NAME;
-            zero = EngConfig.ZERO;
-            minus = EngConfig.MINUS;
-        }
+        languageInitialization(language);
 
         StringBuilder result = new StringBuilder();
         int quotient;
-        long divisor = 1;
+        double divisor = Math.pow(1000, MAX_RANK);
 
         int one = 1;
         int four = 2;
@@ -51,40 +36,23 @@ public class IntegerConverter {
             number = -number;
         }
 
-        for (int i = 0; i < MAX_RANK; i++) {
-            divisor *= 1000;
-        }
-
         for (int i = MAX_RANK - 1; i >= 0; i--) {
             divisor /= 1000;
             quotient = (int) (number / divisor);
             number %= divisor;
-            if (quotient == 0) {
-                if (i > 0) {
-                    continue;
-                }
+            if (quotient == 0 && i > 0) {
+                continue;
             } else {
                 if (quotient >= 100) {
                     result.append(digitName[quotient / 100][hun]);
                     quotient %= 100;
-                    if (language == Language.ENG && quotient <= 20 && quotient > 0) {
-                        result.append(EngConfig.AND);
-                    }
                 }
                 if (quotient >= 20) {
-                    if (language == Language.ENG && quotient % 10 != 0) {
-                        result.append(EngConfig.AND).append(digitName[quotient / 10][dec]).append('-');
-                    } else {
-                        result.append(digitName[quotient / 10][dec]);
-                    }
+                    result.append(digitName[quotient / 10][dec]);
                     quotient %= 10;
                 }
                 if (quotient >= 10) {
-                    if (language == Language.ENG) {
-                        result.append(EngConfig.AND).append(digitName[quotient - 10][dec2]);
-                    } else {
-                        result.append(digitName[quotient - 10][dec2]);
-                    }
+                    result.append(digitName[quotient - 10][dec2]);
                 } else {
                     if (quotient >= 1) {
                         result.append(digitName[quotient]["0".equals(rankName[i][0]) ? 0 : 1]);
@@ -105,27 +73,44 @@ public class IntegerConverter {
                 }
             }
         }
-
-        String resultString = result.toString();
-        if (resultString.endsWith(" ")) {
-            resultString = resultString.substring(0, resultString.length() - 1);
-        }
-        if (resultString.startsWith("-")) {
-            resultString = resultString.substring(1, resultString.length());
-        }
-        if (resultString.startsWith("and ")) {
-            resultString = resultString.substring(4, resultString.length());
-        }
-
-
-        return resultString
-                .replaceAll(" -", "-")
-                .replaceAll("minus and ", "minus ")
-                .replaceAll("and and", "and");
+        return formatString(result.toString());
     }
 
     public static String numberToString(int number) {
         return numberToString(number, Language.RUS);
+    }
+
+    private static void languageInitialization(Language language) {
+        switch (language) {
+            case UA:
+                UaLanguageInitialization();
+                break;
+            case RUS:
+                RusLanguageInitialization();
+                break;
+        }
+    }
+
+    private static void UaLanguageInitialization() {
+        rankName = UaConfig.RANK_NAME;
+        digitName = UaConfig.DIGIT_NAME;
+        zero = UaConfig.ZERO;
+        minus = UaConfig.MINUS;
+    }
+
+    private static void RusLanguageInitialization() {
+        rankName = RusConfig.RANK_NAME;
+        digitName = RusConfig.DIGIT_NAME;
+        zero = RusConfig.ZERO;
+        minus = RusConfig.MINUS;
+    }
+
+    private static String formatString(String line) {
+        String result = line;
+        if (line.endsWith(" ")) {
+            result = line.substring(0, line.length() - 1);
+        }
+        return result;
     }
 
 }

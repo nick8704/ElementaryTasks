@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 
 public class FileParser {
 
+    private FileParser() {
+    }
+
     public static int lineCounting(String path, String line) {
         Pattern pattern = Pattern.compile(line);
         int count = 0;

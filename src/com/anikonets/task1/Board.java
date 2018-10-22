@@ -6,6 +6,8 @@ public class Board {
     private int width;
     private String evenLine;
     private String oddLine;
+    private final char BLACK_CELL = '*';
+    private final char WHITE_CELL = ' ';
 
     public Board(int width, int height) {
         this.height = height;
@@ -30,19 +32,25 @@ public class Board {
 
     private String initializationOddLine(int height) {
         StringBuilder line = new StringBuilder(defaultLine(height));
+        if(line.toString().equals("")) {
+            return line.toString();
+        }
         if(defaultLine(height).endsWith(" ")) {
-            line.append("*");
+            line.append(BLACK_CELL);
         }
         return line.toString().substring(1);
     }
 
     private String defaultLine(int height) {
         StringBuilder line = new StringBuilder();
+        if(height <= 0) {
+            return line.toString();
+        }
         for (int i = 0; i < height; i++) {
             if(i % 2 == 0) {
-                line.append("*");
+                line.append(BLACK_CELL);
             } else {
-                line.append(" ");
+                line.append(WHITE_CELL);
             }
         }
         return line.toString();

@@ -48,7 +48,7 @@ class TriangleBuilderTest {
     @Test
     void isNotTriangle1() {
         boolean expected = true;
-        boolean actual = TriangleBuilder.isNotTriangle(0, 5, 9);
+        boolean actual = TriangleBuilder.isNotTriangle(1, 5, 9);
         assertEquals(expected, actual);
     }
 
