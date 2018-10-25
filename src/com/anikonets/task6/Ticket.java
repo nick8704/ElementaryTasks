@@ -3,6 +3,7 @@ package com.anikonets.task6;
 public class Ticket {
 
     private int number;
+    private static final int NUMBER_LEHGTH = 6;
 
     public Ticket() {
     }
@@ -24,7 +25,7 @@ public class Ticket {
         int[] tmpArray = makeNumeralArray(number);
         int firstSum = 0;
         int secondSum = 0;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < NUMBER_LEHGTH; i++) {
             if (i < 3) {
                 firstSum += tmpArray[i];
             } else {
@@ -42,7 +43,7 @@ public class Ticket {
         int[] tmpArray = makeNumeralArray(number);
         int firstSum = 0;
         int secondSum = 0;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < NUMBER_LEHGTH; i++) {
             if (tmpArray[i] % 2 == 0) {
                 firstSum += tmpArray[i];
             } else {
@@ -60,8 +61,8 @@ public class Ticket {
             number = -number;
         }
         String tmpLine = Integer.toString(number);
-        if (tmpLine.length() < 6) {
-            int tmpNumber = 6 - tmpLine.length();
+        if (tmpLine.length() < NUMBER_LEHGTH) {
+            int tmpNumber = NUMBER_LEHGTH - tmpLine.length();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < tmpNumber; i++) {
                 sb.append("0");

@@ -11,6 +11,7 @@ public class IntegerConverter {
     private static String[][] digitName;
     private static String zero;
     private static String minus;
+    private static boolean isEnglish = false;
 
     public static String numberToString(int number, Language language) {
         languageInitialization(language);
@@ -46,13 +47,24 @@ public class IntegerConverter {
                 if (quotient >= 100) {
                     result.append(digitName[quotient / 100][hun]);
                     quotient %= 100;
+                    if (isEnglish && quotient <= 20 && quotient > 0) {
+                        result.append(EngConfig.AND);
+                    }
                 }
                 if (quotient >= 20) {
-                    result.append(digitName[quotient / 10][dec]);
+                    if (isEnglish && quotient % 10 != 0) {
+                        result.append(EngConfig.AND).append(digitName[quotient / 10][dec]).append('-');
+                    } else {
+                        result.append(digitName[quotient / 10][dec]);
+                    }
                     quotient %= 10;
                 }
                 if (quotient >= 10) {
-                    result.append(digitName[quotient - 10][dec2]);
+                    if (isEnglish) {
+                        result.append(EngConfig.AND).append(digitName[quotient - 10][dec2]);
+                    } else {
+                        result.append(digitName[quotient - 10][dec2]);
+                    }
                 } else {
                     if (quotient >= 1) {
                         result.append(digitName[quotient]["0".equals(rankName[i][0]) ? 0 : 1]);
@@ -82,13 +94,24 @@ public class IntegerConverter {
 
     private static void languageInitialization(Language language) {
         switch (language) {
+            case ENG:
+                EngLanguageInitialization();
+                break;
             case UA:
                 UaLanguageInitialization();
                 break;
-            case RUS:
+            default:
                 RusLanguageInitialization();
                 break;
         }
+    }
+
+    private static void EngLanguageInitialization() {
+        rankName = EngConfig.RANK_NAME;
+        digitName = EngConfig.DIGIT_NAME;
+        zero = EngConfig.ZERO;
+        minus = EngConfig.MINUS;
+        isEnglish = true;
     }
 
     private static void UaLanguageInitialization() {
@@ -106,11 +129,19 @@ public class IntegerConverter {
     }
 
     private static String formatString(String line) {
-        String result = line;
         if (line.endsWith(" ")) {
-            result = line.substring(0, line.length() - 1);
+            line = line.substring(0, line.length() - 1);
         }
-        return result;
+        if (line.startsWith("-")) {
+            line = line.substring(1, line.length());
+        }
+        if (line.startsWith("and ")) {
+            line = line.substring(4, line.length());
+        }
+        return line
+                .replaceAll(" -", "-")
+                .replaceAll("minus and ", "minus ")
+                .replaceAll("and and", "and");
     }
 
 }

@@ -7,7 +7,7 @@ public class TicketsPack {
 
     private List<Ticket> ticketsPack = new ArrayList<>();
 
-    private TicketsPack() {
+    public TicketsPack() {
     }
 
     public TicketsPack(List<Ticket> ticketsPack) {
